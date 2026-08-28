@@ -1,63 +1,72 @@
 package com.example.webviewapp;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+
 public class MainActivity extends AppCompatActivity {
+
 
     private WebView webView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        
+
+
         webView = new WebView(this);
-        
-        // Enhanced WebView settings for web app experience
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setDatabaseEnabled(true);
-        
-        // Mobile-optimized settings
-        webSettings.setUseWideViewPort(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setSupportZoom(true);
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setDisplayZoomControls(false);
-        
-        // Performance optimizations
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        webSettings.setAllowFileAccess(true);
-        webSettings.setAllowContentAccess(true);
-        
-        // Web app specific settings
-        webSettings.setMediaPlaybackRequiresUserGesture(false);
-        
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                // Handle all URLs within WebView
-                view.loadUrl(url);
-                return true;
-            }
-        });
-        
-        // Load your main HTML file
-        webView.loadUrl("file:///android_asset/html/index.html");
-        
+
+
         setContentView(webView);
+
+
+
+        WebSettings webSettings = webView.getSettings();
+
+
+        webSettings.setJavaScriptEnabled(true);
+
+        webSettings.setDomStorageEnabled(true);
+
+        webSettings.setDatabaseEnabled(true);
+
+
+        webSettings.setAllowFileAccess(true);
+
+        webSettings.setAllowContentAccess(true);
+
+
+        webView.setWebViewClient(new WebViewClient());
+
+
+
+        webView.loadUrl(
+            "file:///android_asset/dist/index.html"
+        );
+
     }
+
+
 
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
+
+        if(webView.canGoBack()){
+
             webView.goBack();
-        } else {
+
+        }else{
+
             super.onBackPressed();
+
         }
+
     }
+
 }
